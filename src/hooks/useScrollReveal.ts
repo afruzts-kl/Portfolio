@@ -11,7 +11,7 @@ export function useScrollReveal<T extends HTMLElement>(
   options: UseScrollRevealOptions = {}
 ) {
   const { threshold = 0.1, rootMargin = "0px 0px -50px 0px", triggerOnce = true } = options;
-  const [isVisible, setIsVisible] = useState(() => reducedMotion());
+  const [isVisible, setIsVisible] = useState(() => prefersReducedMotion());
   const elementRef = useRef<T>(null);
   const reducedMotion = useReducedMotion();
 
@@ -45,7 +45,7 @@ export function useScrollReveal<T extends HTMLElement>(
   return { ref: elementRef, isVisible };
 }
 
-function reducedMotion(): boolean {
+function prefersReducedMotion(): boolean {
   if (typeof window === "undefined") return false;
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
@@ -55,17 +55,17 @@ export function useStaggeredReveal<T extends HTMLElement>(
   options: UseScrollRevealOptions = {}
 ) {
   const [visibleIndices, setVisibleIndices] = useState<Set<number>>(() => {
-    if (reducedMotion()) {
+    if (prefersReducedMotion()) {
       return new Set(Array.from({ length: count }, (_, i) => i));
     }
     return new Set();
   });
   const elementRef = useRef<T>(null);
-  const prefersReducedMotion = useReducedMotion();
+  const reducedMotionPreference = useReducedMotion();
   const { threshold = 0.1, rootMargin = "0px 0px -50px 0px", triggerOnce = true } = options;
 
   useEffect(() => {
-    if (prefersReducedMotion) {
+    if (reducedMotionPreference) {
       setVisibleIndices(new Set(Array.from({ length: count }, (_, i) => i)));
       return;
     }
@@ -93,7 +93,7 @@ export function useStaggeredReveal<T extends HTMLElement>(
 
     observer.observe(element);
     return () => observer.disconnect();
-  }, [count, threshold, rootMargin, triggerOnce, prefersReducedMotion]);
+  }, [count, threshold, rootMargin, triggerOnce, reducedMotionPreference]);
 
   return { ref: elementRef, visibleIndices };
 }

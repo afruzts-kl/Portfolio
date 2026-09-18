@@ -24,7 +24,7 @@ export function useTypewriter(config: TypewriterConfig) {
   const reducedMotion = useReducedMotion();
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isMountedRef = useRef(true);
-  const typeRef = useRef<() => void>();
+  const typeRef = useRef<(() => void) | null>(null);
 
   const type = useCallback(() => {
     if (!isMountedRef.current) return;

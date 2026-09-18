@@ -9,13 +9,13 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "primary", size = "md", loading, disabled, children, ...props }, ref) => {
-    const baseStyles = "inline-flex items-center justify-center font-ui font-medium transition-all duration-fast ease-out-expo focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg disabled:opacity-50 disabled:cursor-not-allowed";
+    const baseStyles = "inline-flex items-center justify-center font-ui font-medium transition-all duration-300 ease-out-expo focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2 focus-visible:ring-offset-bg disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] hover:-translate-y-0.5";
 
     const variants = {
-      primary: "bg-accent text-bg hover:bg-accent-dim active:scale-[0.98] shadow-glow",
-      secondary: "bg-bg-elevated text-fg border border-border hover:border-border-hover hover:bg-bg-card active:scale-[0.98]",
-      ghost: "text-fg-muted hover:text-fg hover:bg-bg-elevated active:scale-[0.98]",
-      outline: "border-2 border-accent text-accent hover:bg-accent/10 active:scale-[0.98]",
+      primary: "bg-gradient-to-r from-violet-500 via-violet-500 to-sky-500 text-white shadow-[0_18px_40px_rgba(124,58,237,0.3)] hover:shadow-[0_22px_48px_rgba(124,58,237,0.42)]",
+      secondary: "bg-bg-elevated/80 text-fg border border-border hover:border-violet-400/50 hover:bg-bg-card/90 shadow-[0_12px_30px_rgba(15,23,42,0.35)]",
+      ghost: "text-fg-muted hover:text-fg hover:bg-bg-elevated/80",
+      outline: "border border-violet-400/50 bg-violet-500/5 text-violet-200 hover:bg-violet-500/10 hover:border-violet-300 shadow-[0_10px_24px_rgba(124,58,237,0.18)]",
     };
 
     const sizes = {

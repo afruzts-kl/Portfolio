@@ -42,8 +42,8 @@ export function Header({ onNavigate }: HeaderProps) {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-normal ease-out-expo",
-        scrolled ? "bg-bg/80 backdrop-blur-md border-b border-border" : "bg-transparent"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out-expo",
+        scrolled ? "border-b border-white/10 bg-slate-950/60 backdrop-blur-xl shadow-[0_10px_40px_rgba(2,6,23,0.35)]" : "bg-transparent"
       )}
       role="banner"
     >
@@ -64,10 +64,10 @@ export function Header({ onNavigate }: HeaderProps) {
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className="font-ui text-body-sm text-fg-muted hover:text-fg transition-colors duration-fast relative py-1"
+                className="relative py-1 font-ui text-body-sm text-fg-muted transition-all duration-300 hover:text-violet-200"
               >
                 {item.label}
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent scale-x-0 origin-left transition-transform duration-fast ease-out-expo group-hover:scale-x-100" />
+                <span className="absolute -bottom-1 left-0 h-0.5 w-full origin-left scale-x-0 rounded-full bg-gradient-to-r from-violet-400 to-sky-400 transition-transform duration-300 ease-out-expo group-hover:scale-x-100" />
               </button>
             ))}
           </div>
@@ -86,14 +86,14 @@ export function Header({ onNavigate }: HeaderProps) {
               href="https://www.linkedin.com/in/afruz-t-s-9b6541436/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-fg-muted hover:text-accent transition-colors duration-fast p-2 rounded-lg hover:bg-bg-elevated"
+              className="rounded-lg border border-transparent p-2 text-fg-muted transition-all duration-300 hover:border-violet-400/30 hover:bg-violet-500/5 hover:text-violet-200"
               aria-label="LinkedIn"
             >
               <Linkedin className="h-5 w-5" />
             </a>
             <a
               href="mailto:afruzts@gmail.com"
-              className="text-fg-muted hover:text-accent transition-colors duration-fast p-2 rounded-lg hover:bg-bg-elevated"
+              className="rounded-lg border border-transparent p-2 text-fg-muted transition-all duration-300 hover:border-violet-400/30 hover:bg-violet-500/5 hover:text-violet-200"
               aria-label="Email"
             >
               <Mail className="h-5 w-5" />
