@@ -68,7 +68,7 @@ export function CurrentlyBuilding() {
     <section
       ref={ref}
       id="building"
-      className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8"
+      className="py-16 lg:py-20 px-4 sm:px-6 lg:px-8"
       aria-labelledby="building-title"
     >
       <div className="mx-auto max-w-7xl">

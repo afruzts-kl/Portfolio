@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "../../utils/cn";
 import { useReducedMotion } from "../../hooks";
 
@@ -98,32 +98,31 @@ function getInitialLines(commands: TypingTerminalProps["commands"], prompt: stri
 
 export function TypingTerminal({ commands, className, prompt = "~/portfolio $", loop = true }: TypingTerminalProps) {
   const reducedMotion = useReducedMotion();
-  const [lines, setLines] = useState<TerminalLine[]>(() => getInitialLines(commands, prompt));
-  const isMountedRef = useRef(true);
+  const [lines, setLines] = useState<TerminalLine[]>([]);
 
   useEffect(() => {
-    isMountedRef.current = true;
     if (reducedMotion) {
       setLines(getInitialLines(commands, prompt));
       return;
     }
 
+    let cancelled = false;
     const runSequence = async () => {
       for (let i = 0; i < commands.length; ) {
-        if (!isMountedRef.current) return;
+        if (cancelled) return;
 
         const cmd = commands[i];
         const fullCommand = cmd.command;
 
         await new Promise((r) => setTimeout(r, cmd.delay || 500));
 
-        if (!isMountedRef.current) return;
+        if (cancelled) return;
         setLines((prev) => [...prev, { type: "prompt", content: fullCommand, prompt }]);
 
         if (cmd.output) {
           for (const out of cmd.output) {
             await new Promise((r) => setTimeout(r, 200));
-            if (!isMountedRef.current) return;
+            if (cancelled) return;
             setLines((prev) => [...prev, { type: "output", content: out }]);
           }
         }
@@ -133,7 +132,7 @@ export function TypingTerminal({ commands, className, prompt = "~/portfolio $", 
         i++;
         if (i >= commands.length && loop) {
           await new Promise((r) => setTimeout(r, 2000));
-          if (!isMountedRef.current) return;
+          if (cancelled) return;
           setLines([]);
           i = 0;
         } else if (i >= commands.length && !loop) {
@@ -145,7 +144,7 @@ export function TypingTerminal({ commands, className, prompt = "~/portfolio $", 
     runSequence();
 
     return () => {
-      isMountedRef.current = false;
+      cancelled = true;
     };
   }, [commands, prompt, loop, reducedMotion]);
 

@@ -43,7 +43,7 @@ export function Header({ onNavigate }: HeaderProps) {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out-expo",
-        scrolled ? "border-b border-white/10 bg-slate-950/60 backdrop-blur-xl shadow-[0_10px_40px_rgba(2,6,23,0.35)]" : "bg-transparent"
+        scrolled ? "border-b border-lime-100/10 bg-[#090b0a]/75 backdrop-blur-xl shadow-[0_10px_40px_rgba(2,6,23,0.35)]" : "bg-transparent"
       )}
       role="banner"
     >
@@ -64,10 +64,10 @@ export function Header({ onNavigate }: HeaderProps) {
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className="relative py-1 font-ui text-body-sm text-fg-muted transition-all duration-300 hover:text-violet-200"
+                className="group relative py-1 font-ui text-body-sm text-fg-muted transition-all duration-300 hover:text-lime-100"
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 h-0.5 w-full origin-left scale-x-0 rounded-full bg-gradient-to-r from-violet-400 to-sky-400 transition-transform duration-300 ease-out-expo group-hover:scale-x-100" />
+                <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-gradient-to-r from-lime-300 to-cyan-300 transition-transform duration-300 ease-out-expo group-hover:scale-x-100" />
               </button>
             ))}
           </div>

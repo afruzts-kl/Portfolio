@@ -32,7 +32,7 @@ export function ContactSection() {
     <section
       ref={ref}
       id="contact"
-      className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8"
+      className="py-16 lg:py-20 px-4 sm:px-6 lg:px-8"
       aria-labelledby="contact-title"
     >
       <div className="mx-auto max-w-4xl">

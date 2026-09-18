@@ -11,7 +11,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     const variants = {
       default: "bg-bg-card/70 border border-border/80 shadow-[0_18px_40px_rgba(2,6,23,0.35)] backdrop-blur-sm",
       elevated: "bg-bg-elevated/80 border border-border/80 shadow-[0_18px_40px_rgba(2,6,23,0.45)]",
-      interactive: "bg-bg-card/70 border border-border/80 backdrop-blur-sm hover:border-violet-400/40 hover:shadow-[0_16px_40px_rgba(124,58,237,0.18)] transition-all duration-300 ease-out cursor-pointer",
+      interactive: "bg-bg-card/70 border border-border/80 backdrop-blur-sm hover:-translate-y-1 hover:border-lime-300/45 hover:shadow-[0_20px_44px_rgba(182,243,106,0.12)] transition-all duration-300 ease-out cursor-pointer",
     };
 
     const paddings = {

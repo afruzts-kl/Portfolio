@@ -20,7 +20,7 @@ export function ProjectTimeline() {
     <section
       ref={ref}
       id="timeline"
-      className="px-4 sm:px-6 lg:px-8"
+      className="py-16 lg:py-24 px-4 sm:px-6 lg:px-8"
       aria-labelledby="timeline-title"
     >
       <div className="mx-auto max-w-4xl">
