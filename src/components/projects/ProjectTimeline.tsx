@@ -7,10 +7,9 @@ import { useReducedMotion } from "../../hooks";
 import { sound } from "../../utils/sound";
 
 const timelineData = [
-  { year: "2022", label: "Foundations", projects: ["minecraft-infrastructure"] },
-  { year: "2023", label: "Experimentation", projects: ["jarvis-ai-assistant", "esp8266-iot-experiments"] },
-  { year: "2024", label: "Full-Stack & Infrastructure", projects: ["healthcare-management", "home-networking-lab"] },
-  { year: "2025", label: "Current Focus", projects: [] },
+  { year: "2024", label: "Full-Stack Foundations", projects: ["healthcare-management", "esp8266-iot-experiments"] },
+  { year: "2025", label: "Systems & Automation", projects: ["jarvis-ai-assistant", "minecraft-infrastructure", "home-networking-lab", "discord-network-monitor"] },
+  { year: "2026", label: "Shipping & Going Deeper", projects: ["health-care-v2", "immich-self-hosting", "home-network-relay", "portfolio-lab"] },
 ];
 
 export function ProjectTimeline() {

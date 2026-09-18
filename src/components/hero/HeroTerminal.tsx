@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { sound } from "../../utils/sound";
 import { Terminal as TerminalIcon, Sparkles } from "lucide-react";
 import { useReducedMotion } from "../../hooks";
@@ -16,7 +16,7 @@ const commandsMap: Record<CommandKey, CommandData> = {
     output: [
       "user: afruzts@portfolio",
       "role: CSE Student • Developer • Systems Builder",
-      "affiliation: Ilahia College of Engineering and Technology",
+      "affiliation: Ilahia College of Engineering",
       "motto: 'turn curiosity into working systems'",
     ],
   },
@@ -24,9 +24,9 @@ const commandsMap: Record<CommandKey, CommandData> = {
     cmd: "cat projects/active",
     output: [
       "jarvis-ai-assistant        [Experimental]  Local voice AI & automation",
-      "healthcare-management      [Active]        React + Vite + Supabase CRUD",
-      "minecraft-infrastructure   [Active]        Paper / Velocity proxy network",
-      "home-networking-lab        [Building]      Docker + Cloudflare + Tailscale",
+      "health-care-v2              [Active]        React + Supabase healthcare platform",
+      "gods-own-smp               [Active]        Minecraft server ecosystem",
+      "home-lab + immich          [Building]      Self-hosting + remote access",
     ],
   },
   neofetch: {
@@ -176,7 +176,7 @@ export function HeroTerminal() {
         {/* Live System Counter Footer */}
         <div className="mt-2.5 grid grid-cols-3 gap-px overflow-hidden rounded-xl border border-white/5 bg-white/5">
           {[
-            ["04", "live builds"],
+            ["08+", "projects explored"],
             ["∞", "curiosity"],
             ["24/7", "learning"],
           ].map(([value, label]) => (

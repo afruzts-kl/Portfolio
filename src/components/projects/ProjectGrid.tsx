@@ -17,7 +17,7 @@ export function ProjectGrid({ featuredOnly = false }: { featuredOnly?: boolean }
     if (filter === "all") {
       return featuredOnly ? p.featured : true;
     }
-    return p.status === filter;
+    return p.status === filter && (!featuredOnly || p.featured);
   });
 
   const handleExpand = (projectId: string) => {
@@ -54,8 +54,8 @@ export function ProjectGrid({ featuredOnly = false }: { featuredOnly?: boolean }
             </div>
             <h2 className="font-display-bold text-display-lg text-fg mb-3">Projects</h2>
             <p className="font-ui text-body-lg text-fg-muted max-w-2xl">
-              The core of what I do. Each project represents a problem I wanted to solve, a technology I wanted to understand,
-              or an idea I had to build. No tutorials, no templates — just honest experimentation.
+              From local AI and full-stack apps to Minecraft infrastructure, self-hosting and microcontrollers.
+              This is a living lab of things I actually built, broke, debugged, and learned from.
             </p>
           </div>
 

@@ -1,41 +1,32 @@
-# React + TypeScript + Vite
+# Afruz T S — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Interactive personal portfolio for Afruz T S, First Year CSE student at Ilahia College of Engineering.
 
-Currently, two official plugins are available:
+## Run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Production build
 
+```bash
+npm run build
+```
 
-## Portfolio identity
-- Name: Afruz T S
-- Education: First Year CSE, Ilahia College of Engineering
+## Highlights
+
+- Interactive terminal-style hero
+- Project explorer with filters and detail panels
+- Project timeline covering recent work
+- Motion, tilt cards, glow effects and responsive layouts
+- Reduced-motion support
+- GitHub, LinkedIn and email contact points
+
+## Contact
+
+- Email: afruzts@gmail.com
 - GitHub: https://github.com/afruzts-kl
 - LinkedIn: https://www.linkedin.com/in/afruz-t-s-9b6541436/
-- Email: afruzts@gmail.com
 - Discord: mr_ats (Zeyrox_Viper)
