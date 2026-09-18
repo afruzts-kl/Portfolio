@@ -411,39 +411,3 @@ body {
 #main-content > section:nth-of-type(even):not(#hero) {
   background: linear-gradient(90deg, rgba(182, 243, 106, 0.025), transparent 30%, rgba(34, 211, 238, 0.018));
 }
-
-
-/* Portfolio polish */
-@layer utilities {
-  .shimmer-text {
-    background: linear-gradient(110deg, #f4f7f1 10%, #b6f36a 38%, #7dd3fc 55%, #f4f7f1 72%);
-    background-size: 220% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: shimmer 7s linear infinite;
-  }
-
-  .hero-cursor-glow {
-    position: absolute;
-    width: 340px;
-    height: 340px;
-    border-radius: 999px;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(182,243,106,.14), rgba(56,189,248,.05) 38%, transparent 70%);
-    filter: blur(8px);
-    z-index: 0;
-  }
-
-  @keyframes shimmer {
-    0% { background-position: 200% center; }
-    100% { background-position: -20% center; }
-  }
-
-  .noise-overlay {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
-    opacity: .025;
-    mix-blend-mode: screen;
-  }
-}

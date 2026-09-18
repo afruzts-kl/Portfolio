@@ -14,10 +14,9 @@ export function ProjectGrid({ featuredOnly = false }: { featuredOnly?: boolean }
   const { ref } = useScrollReveal({ threshold: 0.1, triggerOnce: true });
 
   const filteredProjects = projects.filter((p) => {
-    if (filter === "all") {
-      return featuredOnly ? p.featured : true;
-    }
-    return p.status === filter && (!featuredOnly || p.featured);
+    if (featuredOnly && !p.featured) return false;
+    if (filter === "all") return true;
+    return p.status === filter;
   });
 
   const handleExpand = (projectId: string) => {
@@ -54,8 +53,8 @@ export function ProjectGrid({ featuredOnly = false }: { featuredOnly?: boolean }
             </div>
             <h2 className="font-display-bold text-display-lg text-fg mb-3">Projects</h2>
             <p className="font-ui text-body-lg text-fg-muted max-w-2xl">
-              From local AI and full-stack apps to Minecraft infrastructure, self-hosting and microcontrollers.
-              This is a living lab of things I actually built, broke, debugged, and learned from.
+              The core of what I do. Each project represents a problem I wanted to solve, a technology I wanted to understand,
+              or an idea I had to build. No tutorials, no templates — just honest experimentation.
             </p>
           </div>
 

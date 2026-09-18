@@ -133,6 +133,20 @@ export function Hero() {
               onPrimaryClick={scrollToProjects}
               onSecondaryClick={() => window.open("https://github.com/afruzts-kl", "_blank", "noopener,noreferrer")}
             />
+
+            <div className="grid max-w-xl grid-cols-2 gap-2 sm:grid-cols-4" aria-label="Portfolio highlights">
+              {[
+                ["08+", "projects"],
+                ["06", "domains"],
+                ["02", "platforms"],
+                ["01", "curious brain"],
+              ].map(([value, label]) => (
+                <div key={label} className="group rounded-xl border border-white/7 bg-white/[0.025] px-3 py-2.5 transition-all hover:-translate-y-0.5 hover:border-lime-300/25 hover:bg-lime-300/[0.04]">
+                  <div className="font-display-semibold text-lg text-fg group-hover:text-lime-200">{value}</div>
+                  <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-fg-subtle">{label}</div>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="relative lg:pl-6">

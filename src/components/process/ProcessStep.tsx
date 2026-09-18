@@ -1,5 +1,4 @@
 import { cn } from "../../utils/cn";
-import { useReducedMotion } from "../../hooks";
 import { motion } from "framer-motion";
 import { sound } from "../../utils/sound";
 
@@ -10,60 +9,64 @@ interface ProcessStepProps {
     title: string;
     description: string;
     icon: string;
+    label: string;
+    examples: string[];
   };
   index: number;
-  isVisible: boolean;
   isLast: boolean;
   Icon: React.ComponentType<{ className?: string }>;
 }
 
-export function ProcessStep({ step, index, isVisible, isLast, Icon }: ProcessStepProps) {
-  const reducedMotion = useReducedMotion();
-
+export function ProcessStep({ step, index, isLast, Icon }: ProcessStepProps) {
   return (
-    <motion.div
-      className={cn("relative flex gap-6 lg:pl-16 group", !isVisible && "opacity-0")}
-      initial={!reducedMotion && !isVisible ? { opacity: 0, x: -30 } : false}
-      animate={isVisible ? { opacity: 1, x: 0 } : false}
-      transition={{ duration: reducedMotion ? 0 : 0.5, delay: index * 0.1, ease: "easeOut" }}
+    <motion.article
+      className={cn(
+        "relative flex gap-5 lg:gap-8 group",
+        index % 2 === 1 && "lg:flex-row-reverse"
+      )}
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.45, delay: Math.min(index * 0.06, 0.3), ease: "easeOut" }}
       onMouseEnter={() => sound.playHover()}
     >
-      {/* Step Circle with Pulsing Glow */}
-      <div
-        className="relative flex-shrink-0 w-12 h-12 lg:w-10 lg:h-10 rounded-full border-2 border-bg flex items-center justify-center z-10 transition-transform duration-300 group-hover:scale-110 shadow-[0_0_15px_rgba(182,243,106,0.3)]"
-        style={{ backgroundColor: "var(--accent)" }}
-      >
-        <span className="font-mono text-xs font-bold text-bg">{step.number}</span>
-        {!isLast && !reducedMotion && (
-          <motion.div
-            className="absolute left-1/2 top-10 w-0.5 h-full -translate-x-1/2"
-            style={{ background: "linear-gradient(180deg, var(--accent) 0%, rgba(255,255,255,0.08) 100%)" }}
-            initial={{ scaleY: 0 }}
-            animate={{ scaleY: 1 }}
-            transition={{ duration: 0.8, delay: index * 0.1 + 0.3, ease: "easeOut" }}
-            aria-hidden="true"
-          />
-        )}
+      <div className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-lime-200/30 bg-[#101710] shadow-[0_0_24px_rgba(182,243,106,0.12)] transition-transform duration-300 group-hover:scale-110 group-hover:border-lime-200/70 lg:h-14 lg:w-14">
+        <span className="font-mono text-xs font-bold text-accent">{step.number}</span>
       </div>
 
-      {/* Step Card Container */}
-      <div className="flex-1 pt-1 lg:pt-0">
-        <div className="rounded-2xl border border-white/5 bg-bg-card/70 p-5 backdrop-blur-md transition-all duration-300 group-hover:border-lime-400/30 group-hover:bg-bg-elevated/90 group-hover:shadow-[0_15px_35px_rgba(0,0,0,0.4),0_0_20px_rgba(182,243,106,0.1)] group-hover:-translate-y-0.5">
-          <div className="flex items-start gap-4">
-            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(182,243,106,0.3)]">
-              <Icon className="h-6 w-6" />
+      {!isLast && (
+        <div
+          className="absolute left-6 top-14 bottom-[-4rem] w-px bg-gradient-to-b from-lime-300/50 via-white/10 to-transparent lg:left-7"
+          aria-hidden="true"
+        />
+      )}
+
+      <div className="min-w-0 flex-1 lg:max-w-[calc(50%-2.5rem)]">
+        <div className="relative overflow-hidden rounded-3xl border border-white/8 bg-gradient-to-br from-white/[0.055] to-white/[0.015] p-6 backdrop-blur-xl transition-all duration-300 group-hover:-translate-y-1 group-hover:border-lime-300/30 group-hover:shadow-[0_20px_60px_rgba(0,0,0,0.35),0_0_35px_rgba(182,243,106,0.08)] lg:p-7">
+          <div className="absolute -right-16 -top-16 h-32 w-32 rounded-full bg-lime-300/5 blur-2xl transition-opacity group-hover:opacity-100" />
+          <div className="relative flex items-start gap-4">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-lime-300/15 bg-lime-300/8 text-accent">
+              <Icon className="h-5 w-5" />
             </div>
-            <div>
-              <h3 className="font-display-semibold text-display-sm text-fg group-hover:text-lime-200 transition-colors">
-                {step.title}
-              </h3>
-              <p className="font-ui text-body text-fg-muted mt-2 leading-relaxed">
-                {step.description}
-              </p>
+            <div className="min-w-0">
+              <div className="mb-2 flex flex-wrap items-center gap-2">
+                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent/80">{step.label}</span>
+                <span className="h-1 w-1 rounded-full bg-white/20" />
+                <span className="font-mono text-[10px] text-fg-subtle">phase_{step.id}</span>
+              </div>
+              <h3 className="font-display-semibold text-display-sm text-fg">{step.title}</h3>
+              <p className="mt-2 font-ui text-body-sm leading-7 text-fg-muted">{step.description}</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {step.examples.map((example) => (
+                  <span key={example} className="rounded-full border border-white/8 bg-black/20 px-2.5 py-1 font-mono text-[10px] text-fg-subtle transition-colors group-hover:border-lime-300/15 group-hover:text-fg-muted">
+                    {example}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </motion.div>
+    </motion.article>
   );
 }
