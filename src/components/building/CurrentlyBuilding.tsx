@@ -8,7 +8,6 @@ interface BuildingProject {
   techStack: string[];
   status: "planning" | "active" | "paused";
   startDate?: string;
-  githubUrl?: string;
   notes?: string;
 }
 
@@ -20,7 +19,6 @@ const buildingProjects: BuildingProject[] = [
     techStack: ["Python", "FastAPI", "React", "Ollama", "SQLite", "WebSockets"],
     status: "active",
     startDate: "2025-01",
-    githubUrl: "https://github.com/afruzts-kl/local-ai-assistant-v2",
     notes: "Core engine done. Working on plugin system and web dashboard.",
   },
   {
@@ -30,7 +28,6 @@ const buildingProjects: BuildingProject[] = [
     techStack: ["Grafana", "Prometheus", "Loki", "Promtail", "Docker", "Node Exporter"],
     status: "active",
     startDate: "2025-02",
-    githubUrl: "https://github.com/afruzts-kl/homelab-monitoring",
     notes: "Dashboards configured. Working on alerting rules and log aggregation.",
   },
   {
@@ -40,7 +37,6 @@ const buildingProjects: BuildingProject[] = [
     techStack: ["Java", "Paper API", "Gradle", "MariaDB", "Discord4J"],
     status: "planning",
     startDate: "2025-03",
-    githubUrl: "https://github.com/afruzts-kl/mc-plugin-suite",
     notes: "Architecture designed. Starting core module implementation.",
   },
   {
@@ -50,7 +46,6 @@ const buildingProjects: BuildingProject[] = [
     techStack: ["ESP32", "ESP-NOW", "PlatformIO", "KiCad", "MQTT", "Home Assistant"],
     status: "paused",
     startDate: "2024-11",
-    githubUrl: "https://github.com/afruzts-kl/esp32-sensor-network",
     notes: "PCB v1 designed. Waiting for parts. Firmware prototype working on breadboard.",
   },
 ];
@@ -100,11 +95,7 @@ export function CurrentlyBuilding() {
 
         <div className="mt-12 text-center">
           <p className="font-ui text-body-sm text-fg-muted">
-            <span className="font-mono text-accent">//</span> Want to see the code? Most repos are public on{" "}
-            <a href="https://github.com/afruzts-kl" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-mono">
-              GitHub
-            </a>
-            {"."}
+            <span className="font-mono text-accent">//</span> Works in progress — updates will appear here as they evolve.
           </p>
         </div>
       </div>

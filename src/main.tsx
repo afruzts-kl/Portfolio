@@ -59,6 +59,9 @@ if (typeof window !== 'undefined') {
 
     const message = messages[Math.floor(Math.random() * messages.length)];
 
+    // Trigger matrix rain animation
+    window.dispatchEvent(new CustomEvent("trigger-matrix-rain"));
+
     // Create a toast notification
     const toast = document.createElement('div');
     toast.textContent = message;

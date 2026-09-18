@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { cn } from "../../utils/cn";
-import { ExternalLink, Github, ChevronRight, Clock } from "lucide-react";
+import { ExternalLink, ChevronRight, Clock, Github } from "lucide-react";
 import type { Project } from "./projects.data";
-import { Card } from "../ui";
+import { TiltCard } from "../ui";
 import { statusLabels } from "./projects.data";
+import { sound } from "../../utils/sound";
 
 interface ProjectCardProps {
   project: Project;
@@ -19,78 +20,84 @@ export function ProjectCard({ project, onClick, isExpanded = false, onExpand }: 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    sound.playClick();
     onExpand?.();
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
+      sound.playClick();
       onExpand?.();
     }
   };
 
   return (
-    <Card
-      variant="interactive"
-      padding="lg"
+    <TiltCard
       className={cn(
-        "relative overflow-hidden flex flex-col h-full",
-        isExpanded && "ring-2 ring-accent/50"
+        "relative overflow-hidden flex flex-col h-full cursor-pointer transition-all duration-300",
+        isExpanded && "ring-2 ring-accent/60 shadow-[0_0_30px_rgba(182,243,106,0.25)]"
       )}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onClick={onClick}
+      onClick={onClick || onExpand}
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="button"
       aria-expanded={isExpanded}
       aria-label={`View ${project.title} details`}
     >
-      <div
-        className="absolute top-0 left-0 right-0 h-1 bg-accent/30 opacity-0 transition-opacity duration-300"
-        aria-hidden="true"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-accent/5 via-transparent to-transparent opacity-0 transition-opacity duration-500" aria-hidden="true" />
-
-      <div className="relative z-10 space-y-4">
+      <div className="relative z-10 flex flex-col h-full space-y-4">
+        {/* Header and Status */}
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1 min-w-0">
-            <h3 className="font-display-semibold text-display-sm text-fg truncate">{project.title}</h3>
-            <p className="font-body text-body-sm text-fg-muted mt-1.5 line-clamp-2">{project.shortDescription}</p>
+            <h3 className="font-display-semibold text-display-sm text-fg truncate group-hover:text-lime-200 transition-colors">
+              {project.title}
+            </h3>
+            <p className="font-body text-body-sm text-fg-muted mt-1.5 line-clamp-2 leading-relaxed">
+              {project.shortDescription}
+            </p>
           </div>
           <span
-            className="flex-shrink-0 font-mono-text text-caption px-2 py-1 rounded border"
+            className="inline-flex items-center gap-1.5 flex-shrink-0 font-mono text-[11px] px-2.5 py-1 rounded-full border shadow-sm"
             style={{
               borderColor: statusInfo.color,
               color: statusInfo.color,
               backgroundColor: `${statusInfo.color}15`,
             }}
           >
+            <span
+              className="h-1.5 w-1.5 rounded-full"
+              style={{ backgroundColor: statusInfo.color }}
+            />
             {statusInfo.label}
           </span>
         </div>
 
+        {/* Tech Stack Badges */}
         <div className="flex flex-wrap gap-1.5" role="list" aria-label="Technologies used">
           {project.techStack.slice(0, 6).map((tech) => (
             <span
               key={tech}
-              className="font-mono-text text-caption text-fg-subtle px-2 py-1 bg-bg-elevated border border-border rounded transition-colors hover:border-accent/50 hover:text-accent"
+              onMouseEnter={() => sound.playHover()}
+              className="font-mono text-caption text-fg-subtle px-2 py-0.5 bg-bg-elevated/90 border border-border/80 rounded transition-all duration-200 hover:border-accent/60 hover:text-accent hover:scale-105"
               role="listitem"
             >
               {tech}
             </span>
           ))}
           {project.techStack.length > 6 && (
-            <span className="font-mono-text text-caption text-fg-subtle px-2 py-1 bg-bg-elevated border border-border rounded">
-              +{project.techStack.length - 6} more
+            <span className="font-mono text-caption text-fg-subtle px-2 py-0.5 bg-bg-elevated border border-border rounded">
+              +{project.techStack.length - 6}
             </span>
           )}
         </div>
 
-        <div className="flex items-center gap-4 text-caption text-fg-subtle border-t border-border pt-4 mt-auto">
+        {/* Footer Meta & Actions */}
+        <div className="flex items-center gap-4 text-caption text-fg-subtle border-t border-white/5 pt-4 mt-auto">
           {project.startDate && (
-            <span className="flex items-center gap-1.5 font-mono-text">
-              <Clock className="h-3.5 w-3.5" aria-hidden="true" />
+            <span className="flex items-center gap-1.5 font-mono text-fg-subtle">
+              <Clock className="h-3.5 w-3.5 text-accent/70" aria-hidden="true" />
               {project.startDate}{project.endDate ? ` – ${project.endDate}` : " – Present"}
             </span>
           )}
@@ -100,12 +107,11 @@ export function ProjectCard({ project, onClick, isExpanded = false, onExpand }: 
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 hover:text-accent transition-colors"
+                className="p-1.5 rounded-lg text-fg-muted hover:text-accent hover:bg-white/5 transition-colors"
                 onClick={(e) => e.stopPropagation()}
-                aria-label={`${project.title} on GitHub`}
+                aria-label={`${project.title} GitHub repository`}
               >
-                <Github className="h-3.5 w-3.5" aria-hidden="true" />
-                <span className="font-mono-text">Code</span>
+                <Github className="h-4 w-4" aria-hidden="true" />
               </a>
             )}
             {project.liveUrl && (
@@ -113,29 +119,28 @@ export function ProjectCard({ project, onClick, isExpanded = false, onExpand }: 
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 hover:text-accent transition-colors"
+                className="inline-flex items-center gap-1 font-mono text-xs text-lime-300 hover:text-lime-200 px-2 py-1 rounded bg-lime-300/10 border border-lime-300/30 transition-colors"
                 onClick={(e) => e.stopPropagation()}
                 aria-label={`${project.title} live demo`}
               >
-                <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-                <span className="font-mono-text">Live</span>
+                <ExternalLink className="h-3 w-3" aria-hidden="true" />
+                Live
               </a>
             )}
             <button
               onClick={handleClick}
-              className="flex items-center gap-1.5 font-ui text-body-sm text-fg-muted hover:text-accent transition-colors p-1 rounded hover:bg-bg-elevated"
+              className="flex items-center gap-1 font-ui text-body-sm text-fg-muted hover:text-accent transition-colors p-1 rounded hover:bg-bg-elevated"
               aria-label={`Expand ${project.title}`}
             >
               <span>Details</span>
-              <ChevronRight className={cn("h-4 w-4 transition-transform", hovered && "translate-x-1")} aria-hidden="true" />
+              <ChevronRight
+                className={cn("h-4 w-4 transition-transform duration-200", hovered && "translate-x-1 text-accent")}
+                aria-hidden="true"
+              />
             </button>
           </div>
         </div>
       </div>
-      <div
-        className="absolute bottom-0 left-0 right-0 h-1 bg-accent/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        aria-hidden="true"
-      />
-    </Card>
+    </TiltCard>
   );
 }

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "../../utils/cn";
-import { X, Github, ExternalLink, Clock, FolderGit2, Terminal, Zap, Bug, Lightbulb, ArrowUpRight, ChevronDown } from "lucide-react";
+import { X, ExternalLink, Clock, Terminal, Zap, Bug, Lightbulb, ArrowUpRight, ChevronDown } from "lucide-react";
 import type { Project } from "./projects.data";
 import { Button } from "../ui";
 import { useReducedMotion } from "../../hooks";
@@ -111,7 +111,7 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
               ))}
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-4 text-caption text-fg-subtle border-t border-border pt-4">
+            <div className="flex items-center gap-4 text-caption text-fg-subtle border-t border-border pt-4">
               {project.startDate && (
                 <div className="flex items-center gap-2 font-mono-text">
                   <Clock className="h-3.5 w-3.5" aria-hidden="true" />
@@ -120,10 +120,6 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
                   </span>
                 </div>
               )}
-              <div className="flex items-center gap-2 font-mono-text">
-                <FolderGit2 className="h-3.5 w-3.5" aria-hidden="true" />
-                <span>Repository</span>
-              </div>
             </div>
 
             <div className="space-y-4" role="region" aria-label="Project details">
@@ -186,19 +182,8 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
               ))}
             </div>
 
-            <div className="flex flex-wrap gap-3 pt-4 border-t border-border">
-              {project.githubUrl && (
-                <Button
-                  variant="outline"
-                  size="md"
-                  onClick={() => window.open(project.githubUrl, "_blank", "noopener,noreferrer")}
-                  aria-label={`View ${project.title} on GitHub`}
-                >
-                  <Github className="h-4 w-4" aria-hidden="true" />
-                  View Code
-                </Button>
-              )}
-              {project.liveUrl && (
+            {project.liveUrl && (
+              <div className="flex flex-wrap gap-3 pt-4 border-t border-border">
                 <Button
                   variant="primary"
                   size="md"
@@ -208,8 +193,8 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
                   <ExternalLink className="h-4 w-4" aria-hidden="true" />
                   Live Demo
                 </Button>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </motion.div>
       </motion.div>

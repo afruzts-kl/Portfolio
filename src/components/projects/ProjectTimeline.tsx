@@ -2,8 +2,9 @@ import { cn } from "../../utils/cn";
 import { useScrollReveal } from "../../hooks";
 import { projects } from "./projects.data";
 import { statusLabels } from "./projects.data";
-import { Github, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { useReducedMotion } from "../../hooks";
+import { sound } from "../../utils/sound";
 
 const timelineData = [
   { year: "2022", label: "Foundations", projects: ["minecraft-infrastructure"] },
@@ -101,54 +102,44 @@ export function ProjectTimeline() {
                   return (
                     <div
                       key={project.id}
-                      className="group relative bg-bg-card border border-border rounded-xl p-4 transition-all duration-fast hover:border-border-hover hover:shadow-card-hover"
+                      onMouseEnter={() => sound.playHover()}
+                      className="group relative bg-bg-card/85 border border-border/80 rounded-xl p-4 transition-all duration-300 hover:border-lime-400/40 hover:shadow-[0_10px_30px_rgba(0,0,0,0.4),0_0_20px_rgba(182,243,106,0.1)] hover:-translate-y-0.5"
                     >
                       <div className="flex items-start gap-4">
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
-                            <h3 className="font-display-medium text-display-sm text-fg truncate">{project.title}</h3>
+                            <h3 className="font-display-medium text-display-sm text-fg truncate group-hover:text-lime-200 transition-colors">{project.title}</h3>
                             <span
-                              className="flex-shrink-0 font-mono-text text-caption px-2 py-0.5 rounded border"
+                              className="flex-shrink-0 font-mono text-caption px-2 py-0.5 rounded border"
                               style={{ borderColor: statusInfo.color, color: statusInfo.color, backgroundColor: `${statusInfo.color}15` }}
                             >
                               {statusInfo.label}
                             </span>
                           </div>
-                          <p className="font-body text-body-sm text-fg-muted line-clamp-2">{project.shortDescription}</p>
+                          <p className="font-body text-body-sm text-fg-muted line-clamp-2 leading-relaxed">{project.shortDescription}</p>
                           <div className="flex flex-wrap gap-1.5 mt-2">
                             {project.techStack.slice(0, 4).map((tech) => (
                               <span
                                 key={tech}
-                                className="font-mono-text text-caption text-fg-subtle px-2 py-0.5 bg-bg-elevated border border-border rounded"
+                                className="font-mono text-caption text-fg-subtle px-2 py-0.5 bg-bg-elevated border border-border/60 rounded transition-colors hover:text-accent hover:border-accent/40"
                               >
                                 {tech}
                               </span>
                             ))}
                             {project.techStack.length > 4 && (
-                              <span className="font-mono-text text-caption text-fg-subtle px-2 py-0.5">
+                              <span className="font-mono text-caption text-fg-subtle px-2 py-0.5">
                                 +{project.techStack.length - 4}
                               </span>
                             )}
                           </div>
                         </div>
                         <div className="flex items-center gap-2 shrink-0">
-                          {project.githubUrl && (
-                            <a
-                              href={project.githubUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="p-2 rounded-lg text-fg-muted hover:text-accent hover:bg-bg-elevated transition-colors"
-                              aria-label={`${project.title} on GitHub`}
-                            >
-                              <Github className="h-4 w-4" />
-                            </a>
-                          )}
                           {project.liveUrl && (
                             <a
                               href={project.liveUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="p-2 rounded-lg text-fg-muted hover:text-accent hover:bg-bg-elevated transition-colors"
+                              className="p-2 rounded-lg text-lime-300 hover:text-accent hover:bg-lime-400/10 transition-colors"
                               aria-label={`${project.title} live demo`}
                             >
                               <ExternalLink className="h-4 w-4" />

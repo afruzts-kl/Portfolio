@@ -1,24 +1,41 @@
-import type { ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
+import { CyberCanvas, CustomCursor, ScrollProgress, ScrollToTop, MatrixRain } from "../effects";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 export function Layout({ children }: LayoutProps) {
+  const [showMatrix, setShowMatrix] = useState(false);
+
+  useEffect(() => {
+    const handleMatrixTrigger = () => setShowMatrix(true);
+    window.addEventListener("trigger-matrix-rain", handleMatrixTrigger);
+    return () => window.removeEventListener("trigger-matrix-rain", handleMatrixTrigger);
+  }, []);
+
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-bg text-fg">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[-8%] top-0 h-[28rem] w-[28rem] rounded-full bg-violet-500/10 blur-3xl" />
-        <div className="absolute right-[-10%] top-[18%] h-[24rem] w-[24rem] rounded-full bg-sky-500/10 blur-3xl" />
-        <div className="absolute bottom-8 left-1/3 h-[18rem] w-[18rem] rounded-full bg-fuchsia-500/10 blur-3xl" />
+    <div className="relative min-h-screen overflow-x-hidden bg-bg text-fg selection:bg-lime-400 selection:text-black">
+      <ScrollProgress />
+      <CustomCursor />
+      <CyberCanvas />
+      
+      {showMatrix && <MatrixRain onClose={() => setShowMatrix(false)} />}
+
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="animate-pulse-glow absolute left-[-8%] top-0 h-[32rem] w-[32rem] rounded-full bg-lime-400/10 blur-[120px]" />
+        <div className="animate-float absolute right-[-10%] top-[20%] h-[30rem] w-[30rem] rounded-full bg-cyan-500/10 blur-[130px]" />
+        <div className="animate-pulse-glow absolute bottom-12 left-1/4 h-[24rem] w-[24rem] rounded-full bg-emerald-500/10 blur-[110px]" />
       </div>
+
       <Header />
       <main className="relative z-10 flex-1 pt-16" id="main-content">
         {children}
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }
