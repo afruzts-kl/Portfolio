@@ -30,3 +30,12 @@ If you are developing a production application, we recommend enabling type-aware
 ```
 
 See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+
+
+## Portfolio identity
+- Name: Afruz T S
+- Education: First Year CSE, Ilahia College of Engineering
+- GitHub: https://github.com/afruzts-kl
+- LinkedIn: https://www.linkedin.com/in/afruz-t-s-9b6541436/
+- Email: afruzts@gmail.com
+- Discord: mr_ats (Zeyrox_Viper)
