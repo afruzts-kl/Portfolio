@@ -110,7 +110,7 @@ export const skillCategories: SkillCategory[] = [
 ];
 
 export const levelStyles = {
-  learning: { label: "Learning", color: "var(--info)", bg: "var(--info)/10" },
-  comfortable: { label: "Comfortable", color: "var(--warning)", bg: "var(--warning)/10" },
-  proficient: { label: "Proficient", color: "var(--accent)", bg: "var(--accent)/10" },
+  learning: { label: "Learning", color: "var(--color-info)", bg: "var(--color-info)/15", border: "var(--color-info)/30" },
+  comfortable: { label: "Comfortable", color: "var(--color-warning)", bg: "var(--color-warning)/15", border: "var(--color-warning)/30" },
+  proficient: { label: "Proficient", color: "var(--color-accent)", bg: "var(--color-accent)/15", border: "var(--color-accent)/30" },
 } as const;

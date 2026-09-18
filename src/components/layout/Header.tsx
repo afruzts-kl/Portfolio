@@ -53,9 +53,9 @@ export function Header({ onNavigate }: HeaderProps) {
       >
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="font-display text-display-sm text-fg">Zeyrox Viper</span>
+            <span className="font-display text-display-sm text-fg">Afruz T S</span>
             <span className="hidden sm:inline font-mono text-caption text-fg-subtle px-2 py-0.5 bg-bg-elevated border border-border rounded">
-              STUDENT • DEVELOPER • BUILDER
+              CSE STUDENT • BUILDER
             </span>
           </div>
 
@@ -74,7 +74,7 @@ export function Header({ onNavigate }: HeaderProps) {
 
           <div className="hidden lg:flex items-center gap-3">
             <a
-              href="https://github.com/zeyroxviper"
+              href="https://github.com/afruzts-kl"
               target="_blank"
               rel="noopener noreferrer"
               className="text-fg-muted hover:text-accent transition-colors duration-fast p-2 rounded-lg hover:bg-bg-elevated"
@@ -83,7 +83,7 @@ export function Header({ onNavigate }: HeaderProps) {
               <Github className="h-5 w-5" />
             </a>
             <a
-              href="https://linkedin.com/in/zeyroxviper"
+              href="https://www.linkedin.com/in/afruz-t-s-9b6541436/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-fg-muted hover:text-accent transition-colors duration-fast p-2 rounded-lg hover:bg-bg-elevated"
@@ -92,7 +92,7 @@ export function Header({ onNavigate }: HeaderProps) {
               <Linkedin className="h-5 w-5" />
             </a>
             <a
-              href="mailto:zeyroxviper@example.com"
+              href="mailto:afruzts@gmail.com"
               className="text-fg-muted hover:text-accent transition-colors duration-fast p-2 rounded-lg hover:bg-bg-elevated"
               aria-label="Email"
             >
@@ -132,7 +132,7 @@ export function Header({ onNavigate }: HeaderProps) {
             ))}
             <div className="flex items-center gap-4 pt-4 border-t border-border">
               <a
-                href="https://github.com/zeyroxviper"
+                href="https://github.com/afruzts-kl"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-fg-muted hover:text-accent transition-colors p-2 rounded-lg hover:bg-bg-elevated"
@@ -141,7 +141,7 @@ export function Header({ onNavigate }: HeaderProps) {
                 <Github className="h-6 w-6" />
               </a>
               <a
-                href="https://linkedin.com/in/zeyroxviper"
+                href="https://www.linkedin.com/in/afruz-t-s-9b6541436/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-fg-muted hover:text-accent transition-colors p-2 rounded-lg hover:bg-bg-elevated"
@@ -150,7 +150,7 @@ export function Header({ onNavigate }: HeaderProps) {
                 <Linkedin className="h-6 w-6" />
               </a>
               <a
-                href="mailto:zeyroxviper@example.com"
+                href="mailto:afruzts@gmail.com"
                 className="text-fg-muted hover:text-accent transition-colors p-2 rounded-lg hover:bg-bg-elevated"
                 aria-label="Email"
               >

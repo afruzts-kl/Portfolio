@@ -23,8 +23,13 @@ export function BuildingCard({ project, statusConfig }: BuildingCardProps) {
   const status = statusConfig[project.status];
 
   return (
-    <Card variant="interactive" padding="lg" className="h-full flex flex-col">
-      <div className="flex items-start justify-between gap-4 mb-4">
+    <Card variant="interactive" padding="lg" className="h-full flex flex-col relative overflow-hidden">
+      <div
+        className="absolute left-0 top-0 bottom-0 w-1"
+        style={{ backgroundColor: status.color }}
+        aria-hidden="true"
+      />
+      <div className="flex items-start justify-between gap-4 mb-4 relative">
         <div className="flex-1 min-w-0">
           <h3 className="font-display text-display-sm text-fg">{project.title}</h3>
           <span

@@ -9,7 +9,7 @@ export function AboutSection() {
     <section
       ref={ref}
       id="about"
-      className="py-20 lg:py-32 px-4 sm:px-6 lg:px-8"
+      className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8"
       aria-labelledby="about-title"
     >
       <div className="mx-auto max-w-4xl">
@@ -22,7 +22,7 @@ export function AboutSection() {
         <div className="space-y-8">
           <div className="prose prose-invert max-w-none">
             <p className="font-ui text-body-lg text-fg-muted leading-relaxed mb-6">
-              I'm a student developer who learns by building. Not by reading tutorials, not by following courses —
+              I'm Afruz T S, a first-year CSE student at Ilahia College of Engineering who learns by building. Not by reading tutorials, not by following courses —
               by having an idea, realizing I don't know how to build it, and figuring it out along the way.
             </p>
 
@@ -42,7 +42,7 @@ export function AboutSection() {
             </p>
 
             <p className="font-ui text-body-lg text-fg-muted leading-relaxed">
-              Currently focused on: local AI systems, observable infrastructure, and bridging software with hardware.
+              Right now, I'm focused on local AI, full-stack development, infrastructure, and connecting software with hardware.
               Always open to collaborating on interesting problems.
             </p>
           </div>
@@ -54,15 +54,15 @@ export function AboutSection() {
               <MapPin className="h-5 w-5 text-accent" aria-hidden="true" />
               <div>
                 <p className="font-ui text-caption text-fg-subtle">Location</p>
-                <p className="font-ui text-body-sm text-fg">Earth (GMT+0)</p>
+                <p className="font-ui text-body-sm text-fg">Kerala, India</p>
               </div>
             </div>
             <div className="flex items-center gap-3 p-4 bg-bg-card border border-border rounded-xl">
               <Mail className="h-5 w-5 text-accent" aria-hidden="true" />
               <div>
                 <p className="font-ui text-caption text-fg-subtle">Contact</p>
-                <a href="mailto:zeyroxviper@example.com" className="font-ui text-body-sm text-fg hover:text-accent transition-colors font-mono">
-                  zeyroxviper@example.com
+                <a href="mailto:afruzts@gmail.com" className="font-ui text-body-sm text-fg hover:text-accent transition-colors font-mono">
+                  afruzts@gmail.com
                 </a>
               </div>
             </div>

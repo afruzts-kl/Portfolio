@@ -1,5 +1,5 @@
 import { useScrollReveal } from "../../hooks";
-import { Github, Linkedin, Mail, ExternalLink, Send } from "lucide-react";
+import { Github, Linkedin, Mail, Send } from "lucide-react";
 
 export function ContactSection() {
   const { ref } = useScrollReveal({ threshold: 0.1, triggerOnce: true });
@@ -9,25 +9,22 @@ export function ContactSection() {
       id: "github",
       label: "GitHub",
       description: "Code, repositories, contributions",
-      href: "https://github.com/zeyroxviper",
+      href: "https://github.com/afruzts-kl",
       icon: Github,
-      primary: true,
     },
     {
       id: "linkedin",
       label: "LinkedIn",
       description: "Professional background, connections",
-      href: "https://linkedin.com/in/zeyroxviper",
+      href: "https://www.linkedin.com/in/afruz-t-s-9b6541436/",
       icon: Linkedin,
-      primary: false,
     },
     {
       id: "email",
       label: "Email",
       description: "Direct contact, collaborations",
-      href: "mailto:zeyroxviper@example.com",
+      href: "mailto:afruzts@gmail.com",
       icon: Mail,
-      primary: false,
     },
   ];
 
@@ -35,7 +32,7 @@ export function ContactSection() {
     <section
       ref={ref}
       id="contact"
-      className="py-20 lg:py-32 px-4 sm:px-6 lg:px-8"
+      className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8"
       aria-labelledby="contact-title"
     >
       <div className="mx-auto max-w-4xl">
@@ -44,7 +41,7 @@ export function ContactSection() {
             Get In Touch
           </h2>
           <p className="font-ui text-body-lg text-fg-muted max-w-2xl mx-auto">
-            Open to interesting conversations, collaboration opportunities, or just saying hello.
+            Want to talk about a project, tech, or collaboration?
             Email is best for anything substantial.
           </p>
         </div>
@@ -67,12 +64,13 @@ export function ContactSection() {
                   <p className="font-ui text-caption text-fg-muted">{link.description}</p>
                 </div>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-caption text-fg-subtle">
-                  {link.primary ? "Primary" : "Secondary"}
-                </span>
-                <span className="opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ExternalLink className="h-4 w-4 text-fg-muted" aria-hidden="true" />
+              <div className="flex items-center justify-end">
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity text-fg-muted">
+                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
                 </span>
               </div>
             </a>
@@ -81,7 +79,7 @@ export function ContactSection() {
 
         <div className="text-center pt-8 border-t border-border">
           <a
-            href="mailto:zeyroxviper@example.com?subject=Hello from your portfolio"
+            href="mailto:afruzts@gmail.com?subject=Hello from your portfolio"
             className="inline-flex items-center gap-2 font-ui font-medium px-7 py-3.5 text-body bg-accent text-bg rounded-xl hover:bg-accent-dim transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
           >
             <Send className="h-5 w-5" aria-hidden="true" />

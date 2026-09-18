@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { cn } from "../../utils/cn";
 import { useReducedMotion } from "../../hooks";
 
@@ -85,35 +85,45 @@ interface TypingTerminalProps {
   loop?: boolean;
 }
 
+function getInitialLines(commands: TypingTerminalProps["commands"], prompt: string): TerminalLine[] {
+  const finalLines: TerminalLine[] = [];
+  commands.forEach((cmd) => {
+    finalLines.push({ type: "prompt", content: cmd.command, prompt });
+    if (cmd.output) {
+      cmd.output.forEach((out) => finalLines.push({ type: "output", content: out }));
+    }
+  });
+  return finalLines;
+}
+
 export function TypingTerminal({ commands, className, prompt = "~/portfolio $", loop = true }: TypingTerminalProps) {
-  const [lines, setLines] = useState<TerminalLine[]>([]);
   const reducedMotion = useReducedMotion();
+  const [lines, setLines] = useState<TerminalLine[]>(() => getInitialLines(commands, prompt));
+  const isMountedRef = useRef(true);
 
   useEffect(() => {
+    isMountedRef.current = true;
     if (reducedMotion) {
-      const finalLines: TerminalLine[] = [];
-      commands.forEach((cmd) => {
-        finalLines.push({ type: "prompt", content: cmd.command, prompt });
-        if (cmd.output) {
-          cmd.output.forEach((out) => finalLines.push({ type: "output", content: out }));
-        }
-      });
-      setLines(finalLines);
+      setLines(getInitialLines(commands, prompt));
       return;
     }
 
     const runSequence = async () => {
       for (let i = 0; i < commands.length; ) {
+        if (!isMountedRef.current) return;
+
         const cmd = commands[i];
         const fullCommand = cmd.command;
 
         await new Promise((r) => setTimeout(r, cmd.delay || 500));
 
+        if (!isMountedRef.current) return;
         setLines((prev) => [...prev, { type: "prompt", content: fullCommand, prompt }]);
 
         if (cmd.output) {
           for (const out of cmd.output) {
             await new Promise((r) => setTimeout(r, 200));
+            if (!isMountedRef.current) return;
             setLines((prev) => [...prev, { type: "output", content: out }]);
           }
         }
@@ -123,6 +133,7 @@ export function TypingTerminal({ commands, className, prompt = "~/portfolio $", 
         i++;
         if (i >= commands.length && loop) {
           await new Promise((r) => setTimeout(r, 2000));
+          if (!isMountedRef.current) return;
           setLines([]);
           i = 0;
         } else if (i >= commands.length && !loop) {
@@ -132,6 +143,10 @@ export function TypingTerminal({ commands, className, prompt = "~/portfolio $", 
     };
 
     runSequence();
+
+    return () => {
+      isMountedRef.current = false;
+    };
   }, [commands, prompt, loop, reducedMotion]);
 
   return <Terminal lines={lines} className={className} showCursor={!reducedMotion} />;

@@ -11,7 +11,7 @@ export function IdentityBadges() {
           </div>
           <div>
             <p className="font-ui text-caption text-fg-subtle">Primary Handle</p>
-            <p className="font-mono text-body-sm text-fg">ZeyroxViper</p>
+            <p className="font-mono text-body-sm text-fg">afruzts-kl</p>
             <p className="font-ui text-caption text-fg-muted">GitHub, Technical</p>
           </div>
         </div>
@@ -22,7 +22,7 @@ export function IdentityBadges() {
           </div>
           <div>
             <p className="font-ui text-caption text-fg-subtle">Gaming / Discord</p>
-            <p className="font-mono text-body-sm text-fg">MR_ATS</p>
+            <p className="font-mono text-body-sm text-fg">mr_ats</p>
             <p className="font-ui text-caption text-fg-muted">Discord, Gaming</p>
           </div>
         </div>
@@ -33,7 +33,7 @@ export function IdentityBadges() {
           </div>
           <div>
             <p className="font-ui text-caption text-fg-subtle">Communication</p>
-            <p className="font-mono text-body-sm text-fg">zeyroxviper@example.com</p>
+            <p className="font-mono text-body-sm text-fg">afruzts@gmail.com</p>
             <p className="font-ui text-caption text-fg-muted">Email, Professional</p>
           </div>
         </div>

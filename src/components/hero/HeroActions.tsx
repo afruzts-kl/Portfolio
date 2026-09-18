@@ -1,5 +1,5 @@
 import { ArrowRight, Github } from "lucide-react";
-import { MagneticButton } from "../ui";
+import { Button } from "../ui";
 
 interface HeroActionsProps {
   onPrimaryClick?: () => void;
@@ -9,7 +9,7 @@ interface HeroActionsProps {
 export function HeroActions({ onPrimaryClick, onSecondaryClick }: HeroActionsProps) {
   return (
     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-      <MagneticButton
+      <Button
         variant="primary"
         size="lg"
         onClick={onPrimaryClick}
@@ -18,8 +18,8 @@ export function HeroActions({ onPrimaryClick, onSecondaryClick }: HeroActionsPro
       >
         View Projects
         <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-      </MagneticButton>
-      <MagneticButton
+      </Button>
+      <Button
         variant="outline"
         size="lg"
         onClick={onSecondaryClick}
@@ -28,7 +28,7 @@ export function HeroActions({ onPrimaryClick, onSecondaryClick }: HeroActionsPro
       >
         <Github className="h-5 w-5" aria-hidden="true" />
         GitHub
-      </MagneticButton>
+      </Button>
     </div>
   );
 }

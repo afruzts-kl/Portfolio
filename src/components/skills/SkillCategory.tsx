@@ -58,51 +58,42 @@ export function SkillCategoryCard({ category, index }: SkillCategoryCardProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: reducedMotion ? 0 : 0.4, delay: index * 0.08, ease: "easeOut" }}
-      className="group bg-bg-card border border-border rounded-2xl p-6 transition-all duration-normal hover:border-border-hover hover:shadow-card-hover"
+      className="group bg-bg-elevated/50 border border-border/50 rounded-2xl p-6 transition-all duration-normal hover:border-border-hover hover:shadow-card-hover hover:bg-bg-elevated"
     >
       <div className="flex items-start gap-4 mb-6">
         <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent group-hover:scale-110 transition-transform duration-fast">
           <Icon className="h-6 w-6" />
         </div>
         <div className="flex-1 min-w-0">
-          <h3 className="font-display text-display-sm text-fg">{category.title}</h3>
-          <p className="font-ui text-body-sm text-fg-muted mt-1">{category.description}</p>
+          <h3 className="font-display-semibold text-display-sm text-fg">{category.title}</h3>
+          <p className="font-body text-body-sm text-fg-muted mt-1">{category.description}</p>
         </div>
       </div>
 
-      <div className="space-y-3" role="list" aria-label={`${category.title} skills`}>
-        {category.skills.map((skill) => {
-          const style = levelStyles[skill.level];
-          return (
-            <motion.div
-              key={skill.name}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: reducedMotion ? 0 : 0.2, delay: index * 0.08 + 0.1 }}
-              className="group relative"
-              role="listitem"
-            >
-              <div className="flex items-center justify-between mb-1.5">
-                <span className="font-ui text-body-sm text-fg">{skill.name}</span>
-                <span
-                  className="font-mono text-caption px-2 py-0.5 rounded"
-                  style={{ color: style.color, backgroundColor: style.bg }}
-                >
-                  {style.label}
-                </span>
-              </div>
-              <div className="h-1.5 bg-bg-elevated rounded-full overflow-hidden">
-                <motion.div
-                  className="h-full rounded-full"
-                  style={{ backgroundColor: style.color }}
-                  initial={{ width: 0 }}
-                  animate={{ width: skill.level === "learning" ? "25%" : skill.level === "comfortable" ? "60%" : "90%" }}
-                  transition={{ duration: reducedMotion ? 0 : 0.8, delay: index * 0.08 + 0.15, ease: "easeOut" }}
-                />
-              </div>
-            </motion.div>
-          );
-        })}
+      <div className="flex flex-wrap gap-2" role="list" aria-label={`${category.title} skills`}>
+        {category.skills
+          .slice()
+          .sort((a, b) => {
+            const order = { proficient: 0, comfortable: 1, learning: 2 };
+            return order[a.level] - order[b.level];
+          })
+          .map((skill) => {
+            const style = levelStyles[skill.level];
+            return (
+              <span
+                key={skill.name}
+                className="font-ui text-body-sm px-3 py-1.5 rounded-full border transition-colors hover:border-accent/50 hover:text-accent"
+                style={{
+                  color: style.color,
+                  backgroundColor: style.bg,
+                  borderColor: style.border,
+                }}
+                role="listitem"
+              >
+                {skill.name}
+              </span>
+            );
+          })}
       </div>
     </motion.div>
   );

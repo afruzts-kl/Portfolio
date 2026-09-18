@@ -20,23 +20,24 @@ export function ProjectTimeline() {
     <section
       ref={ref}
       id="timeline"
-      className="py-20 lg:py-32 px-4 sm:px-6 lg:px-8"
+      className="px-4 sm:px-6 lg:px-8"
       aria-labelledby="timeline-title"
     >
       <div className="mx-auto max-w-4xl">
-        <div className="mb-16 text-center">
-          <h2 id="timeline-title" className="font-display text-display-lg text-fg mb-4">
+        <div className="mb-12 lg:mb-16 text-center">
+          <h2 id="timeline-title" className="font-display-bold text-display-lg text-fg mb-4">
             Project Timeline
           </h2>
-          <p className="font-ui text-body-lg text-fg-muted max-w-2xl mx-auto">
+          <p className="font-body text-body-lg text-fg-muted max-w-2xl mx-auto">
             How the work evolved over time. Not a straight line — more like a git history with messy commits,
             branch experiments, and the occasional force push.
           </p>
         </div>
 
         <div className="relative">
+          {/* Desktop timeline line */}
           <div
-            className="absolute left-6 top-0 bottom-0 w-0.5"
+            className="hidden lg:block absolute left-6 top-0 bottom-0 w-0.5"
             style={{ background: "linear-gradient(180deg, var(--color-accent) 0%, var(--color-border) 100%)" }}
             aria-hidden="true"
           />
@@ -45,14 +46,16 @@ export function ProjectTimeline() {
             <div
               key={era.year}
               className={cn(
-                "relative pl-16 pb-12 last:pb-0",
+                "relative",
+                "lg:pl-16 lg:pb-12 lg:last:pb-0",
                 isVisible && !reducedMotion ? "animate-in" : ""
               )}
               style={{
                 transitionDelay: `${eraIndex * 100}ms`,
               }}
             >
-              <div className="absolute left-0 top-2 flex items-center justify-center w-12 h-12">
+              {/* Desktop dot */}
+              <div className="hidden lg:absolute lg:left-0 lg:top-2 lg:flex lg:items-center lg:justify-center lg:w-12 lg:h-12">
                 <div
                   className="relative z-10 w-3 h-3 rounded-full border-2 border-bg"
                   style={{ backgroundColor: "var(--color-accent)" }}
@@ -70,9 +73,23 @@ export function ProjectTimeline() {
                 />
               </div>
 
-              <div className="mb-2">
-                <span className="font-display text-display-sm text-fg">{era.year}</span>
-                <span className="font-ui text-body-sm text-fg-muted ml-3">{era.label}</span>
+              {/* Mobile: inline year badge */}
+              <div className="lg:hidden flex items-center gap-3 mb-4">
+                <div
+                  className="flex-shrink-0 w-8 h-8 rounded-full border-2 border-bg flex items-center justify-center"
+                  style={{ backgroundColor: "var(--color-accent)" }}
+                  aria-hidden="true"
+                />
+                <div>
+                  <span className="font-display-semibold text-display-sm text-fg">{era.year}</span>
+                  <span className="font-body text-body-sm text-fg-muted ml-2">{era.label}</span>
+                </div>
+              </div>
+
+              {/* Desktop year label */}
+              <div className="hidden lg:block mb-2">
+                <span className="font-display-semibold text-display-sm text-fg">{era.year}</span>
+                <span className="font-body text-body-sm text-fg-muted ml-3">{era.label}</span>
               </div>
 
               <div className="space-y-3">
@@ -89,26 +106,26 @@ export function ProjectTimeline() {
                       <div className="flex items-start gap-4">
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
-                            <h3 className="font-display text-display-sm text-fg truncate">{project.title}</h3>
+                            <h3 className="font-display-medium text-display-sm text-fg truncate">{project.title}</h3>
                             <span
-                              className="flex-shrink-0 font-mono text-caption px-2 py-0.5 rounded border"
-                              style={{ borderColor: statusInfo.color, color: statusInfo.color }}
+                              className="flex-shrink-0 font-mono-text text-caption px-2 py-0.5 rounded border"
+                              style={{ borderColor: statusInfo.color, color: statusInfo.color, backgroundColor: `${statusInfo.color}15` }}
                             >
                               {statusInfo.label}
                             </span>
                           </div>
-                          <p className="font-ui text-body-sm text-fg-muted line-clamp-2">{project.shortDescription}</p>
+                          <p className="font-body text-body-sm text-fg-muted line-clamp-2">{project.shortDescription}</p>
                           <div className="flex flex-wrap gap-1.5 mt-2">
                             {project.techStack.slice(0, 4).map((tech) => (
                               <span
                                 key={tech}
-                                className="font-mono text-caption text-fg-subtle px-2 py-0.5 bg-bg-elevated border border-border rounded"
+                                className="font-mono-text text-caption text-fg-subtle px-2 py-0.5 bg-bg-elevated border border-border rounded"
                               >
                                 {tech}
                               </span>
                             ))}
                             {project.techStack.length > 4 && (
-                              <span className="font-mono text-caption text-fg-subtle px-2 py-0.5">
+                              <span className="font-mono-text text-caption text-fg-subtle px-2 py-0.5">
                                 +{project.techStack.length - 4}
                               </span>
                             )}
@@ -146,16 +163,25 @@ export function ProjectTimeline() {
             </div>
           ))}
 
-          <div className="relative pl-16 pt-8">
+          {/* Desktop end dot */}
+          <div className="hidden lg:relative lg:pl-16 lg:pt-8">
             <div className="absolute left-0 top-2 flex items-center justify-center w-12 h-12">
               <div className="relative z-10 w-3 h-3 rounded-full border-2 border-bg" style={{ backgroundColor: "var(--color-border)" }} aria-hidden="true" />
             </div>
             <div className="text-center py-8">
-              <p className="font-ui text-body text-fg-muted mb-4">The story continues...</p>
-              <p className="font-mono text-caption text-fg-subtle">
+              <p className="font-body text-body text-fg-muted mb-4">The story continues...</p>
+              <p className="font-mono-text text-caption text-fg-subtle">
                 <span className="text-accent">//</span> Next commit in progress
               </p>
             </div>
+          </div>
+
+          {/* Mobile end */}
+          <div className="lg:hidden text-center py-8 pt-4 border-t border-border">
+            <p className="font-body text-body text-fg-muted mb-4">The story continues...</p>
+            <p className="font-mono-text text-caption text-fg-subtle">
+              <span className="text-accent">//</span> Next commit in progress
+            </p>
           </div>
         </div>
       </div>

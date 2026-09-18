@@ -18,7 +18,7 @@ export function ProjectGrid({ featuredOnly = false }: { featuredOnly?: boolean }
   };
 
   return (
-    <section id="projects" className="py-20 lg:py-32 px-4 sm:px-6 lg:px-8" ref={ref}>
+    <section id="projects" className="py-24 lg:py-40 px-4 sm:px-6 lg:px-8" ref={ref}>
       <div className="mx-auto max-w-7xl">
         <div className="mb-12">
           <h2 className="font-display text-display-lg text-fg mb-4">Projects</h2>

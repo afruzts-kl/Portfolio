@@ -24,8 +24,9 @@ export function useTypewriter(config: TypewriterConfig) {
   const reducedMotion = useReducedMotion();
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isMountedRef = useRef(true);
+  const typeRef = useRef<() => void>();
 
-  const type = useCallback<() => void>(() => {
+  const type = useCallback(() => {
     if (!isMountedRef.current) return;
 
     const currentString = strings[currentIndex];
@@ -37,9 +38,9 @@ export function useTypewriter(config: TypewriterConfig) {
       if (nextText.length === 0) {
         setIsDeleting(false);
         setCurrentIndex((prev) => (prev + 1) % strings.length);
-        timeoutRef.current = setTimeout(type, pauseDuration);
+        timeoutRef.current = setTimeout(() => typeRef.current?.(), pauseDuration);
       } else {
-        timeoutRef.current = setTimeout(type, deleteSpeed);
+        timeoutRef.current = setTimeout(() => typeRef.current?.(), deleteSpeed);
       }
     } else {
       const nextText = currentString.slice(0, currentText.length + 1);
@@ -48,13 +49,15 @@ export function useTypewriter(config: TypewriterConfig) {
       if (nextText === currentString) {
         if (loop || currentIndex < strings.length - 1) {
           setIsDeleting(true);
-          timeoutRef.current = setTimeout(type, pauseDuration);
+          timeoutRef.current = setTimeout(() => typeRef.current?.(), pauseDuration);
         }
       } else {
-        timeoutRef.current = setTimeout(type, typeSpeed);
+        timeoutRef.current = setTimeout(() => typeRef.current?.(), typeSpeed);
       }
     }
   }, [currentText, currentIndex, isDeleting, strings, typeSpeed, deleteSpeed, pauseDuration, loop]);
+
+  typeRef.current = type;
 
   useEffect(() => {
     isMountedRef.current = true;
@@ -67,7 +70,7 @@ export function useTypewriter(config: TypewriterConfig) {
       };
     }
 
-    type();
+    typeRef.current?.();
 
     return () => {
       isMountedRef.current = false;
@@ -75,7 +78,7 @@ export function useTypewriter(config: TypewriterConfig) {
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [type, reducedMotion, strings]);
+  }, [reducedMotion, strings]);
 
   return currentText;
 }

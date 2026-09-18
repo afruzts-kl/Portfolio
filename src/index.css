@@ -1,3 +1,4 @@
+@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
 
 @theme {
@@ -12,6 +13,7 @@
   --color-accent: #00ff88;
   --color-accent-dim: #00cc6a;
   --color-accent-glow: rgba(0, 255, 136, 0.15);
+  --color-accent-muted: rgba(0, 255, 136, 0.08);
   --color-warning: #ffaa00;
   --color-danger: #ff4444;
   --color-info: #00aaff;
@@ -19,6 +21,11 @@
   --font-display: "Space Grotesk", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
   --font-ui: "IBM Plex Sans", sans-serif;
+
+  --spacing-section-sm: 3rem;    /* 48px */
+  --spacing-section-md: 4rem;    /* 64px */
+  --spacing-section-lg: 5rem;    /* 80px */
+  --spacing-section-xl: 6.5rem;  /* 104px */
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -51,7 +58,7 @@ html {
 body {
   font-family: var(--font-ui);
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.7;
   color: var(--color-fg);
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
@@ -95,6 +102,10 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
   }
 
   .animate-in {
@@ -148,5 +159,72 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  /* Typography utilities */
+  .font-display-bold {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .font-display-semibold {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .font-display-medium {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .font-body {
+    font-family: var(--font-ui);
+    font-weight: 400;
+    line-height: 1.7;
+  }
+
+  .font-mono-text {
+    font-family: var(--font-mono);
+  }
+
+  /* Accordion animation */
+  .accordion-content {
+    overflow: hidden;
+    transition: height 0.3s ease-out;
+  }
+
+  .accordion-content[data-state="closed"] {
+    height: 0;
+  }
+
+  .accordion-content[data-state="open"] {
+    height: auto;
+  }
+}
+
+/* Hero cursor glow */
+.hero-cursor-glow {
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hero-cursor-glow.visible {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cursor-glow {
+    display: none;
   }
 }
